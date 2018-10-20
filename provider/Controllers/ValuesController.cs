@@ -12,8 +12,6 @@ namespace provider.Controllers
 
         // GET api/values
         [HttpGet]
-        //[ContentType()]
-        //[ProducesResponseType(typeof(IEnumerable<string>), (int)HttpStatusCode.OK)]
         public ActionResult Get()
         {
             return Ok(items);
@@ -26,22 +24,22 @@ namespace provider.Controllers
             return Ok(items.First(item => item.Id == id));
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //// POST api/values
+        //[HttpPost]
+        //public void Post([FromBody] string value)
+        //{
+        //}
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //// PUT api/values/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/values/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

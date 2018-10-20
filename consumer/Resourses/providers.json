@@ -1,0 +1,6 @@
+{
+  "provider": {
+    "name": "provider",
+    "uri": "http://localhost:50221/"
+  }
+}
