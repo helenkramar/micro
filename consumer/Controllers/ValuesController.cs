@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using consumer.Client;
 using consumer.Models;
@@ -20,37 +18,16 @@ namespace consumer.Controllers
         }
 
         [HttpGet]
-        public Task<ActionResult> Get()
+        public async Task<IEnumerable<Item>> Get()
         {
-            return _client.GetItems();
+            return await _client.GetItems();
         }
 
-
-        //[HttpGet]
-        //public ActionResult<IEnumerable<string>> Get()
-        //{
-        //    return new ActionResult<IEnumerable<string>>(new[] {"vs", "nm"});
-        //}
-
-        //[HttpGet("/")]
-        //public async Task<ActionResult<Reply>> Get()
-        //{
-        //    return await _client.GetMessageAsync();
-        //}
-
-        // GET api/values
-        //[HttpGet]
-        //public ActionResult<IEnumerable<string>> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        // GET api/values/5
-        //[HttpGet("{id}")]
-        //public ActionResult<string> Get(int id)
-        //{
-        //    return "value";
-        //}
+        [HttpGet("{id}")]
+        public async Task<Item> Get(int id)
+        {
+            return await _client.GetItem(id);
+        }
 
         //// POST api/values
         //[HttpPost]

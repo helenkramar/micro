@@ -10,21 +10,10 @@ namespace consumer.Client
 {
     public interface IItemsClient
     {
-        [Get("/items")]
-        Task<ActionResult> GetItems();
+        [Get("/api/items")]
+        Task<IEnumerable<Item>> GetItems();
 
-        [Get("/items/{id}")]
+        [Get("/api/items/{id}")]
         Task<Item> GetItem(int id);
-    }
-
-    public interface IHelloClient
-    {
-        [Get("/helloworld")]
-        Task<Reply> GetMessageAsync();
-    }
-
-    public class Reply
-    {
-        public string Message { get; set; } = "kuku";
     }
 }
