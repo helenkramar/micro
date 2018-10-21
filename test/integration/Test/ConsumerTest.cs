@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using integration.Models;
 using integration.Pact;
 using PactNet.Mocks.MockHttpService;
@@ -10,30 +11,33 @@ namespace integration.Test
     public class SomethingApiConsumerTests : IClassFixture<ConsumerMyApiPact>
     {
         private IMockProviderService _mockProviderService;
-        //private string _mockProviderServiceBaseUri;
+        dynamic _mockProviderServiceBaseUri;
 
         public SomethingApiConsumerTests(ConsumerMyApiPact data)
         {
             _mockProviderService = data.MockProviderService;
             _mockProviderService.ClearInteractions(); //NOTE: Clears any previously registered interactions before the test is run
-            //_mockProviderServiceBaseUri = data.MockProviderServiceBaseUri;
+            _mockProviderServiceBaseUri = data.MockProviderServiceBaseUri;
         }
 
         [Fact]
-        public void GetSomething_WhenTheTesterSomethingExists_ReturnsTheSomething()
+        public async void GetSomething_WhenTheTesterSomethingExists_ReturnsTheSomething()
         {
             //Arrange
+            string path = "api/items";
+            dynamic body = new[] { new Item { Id = 4, Name = "candy" }, new Item { Id = 5, Name = "cookie" } };
+
             _mockProviderService
-                .Given("There is a something with id 'tester'")
-                .UponReceiving("A GET request to retrieve the something")
+                .Given("There is a items with id 'test'")
+                .UponReceiving("A GET request to retrieve the items")
                 .With(new ProviderServiceRequest
                 {
                     Method = HttpVerb.Get,
-                    Path = "/api/items/2",
+                    Path = $"/{path}",
                     Headers = new Dictionary<string, object>
                     {
-                        { "Accept", "application/json" },
-                        { "Content-Type", "application/json; charset=utf-8" }
+                        //{ "Accept", "application/json" },
+                        //{ "Content-Type", "application/json; charset=utf-8" }
                     }
                 })
                 .WillRespondWith(new ProviderServiceResponse
@@ -43,19 +47,15 @@ namespace integration.Test
                     {
                         { "Content-Type", "application/json; charset=utf-8" }
                     },
-                    Body = new //NOTE: Note the case sensitivity here, the body will be serialised as per the casing defined
-                    {
-                        id = "2",
-                        name = "Book"
-                    }
+                    Body = body
                 }); //NOTE: WillRespondWith call must come last as it will register the interaction
+            path = $@"{_mockProviderServiceBaseUri}{path}";
 
             //Act
-            var service = new Service();
-            var result = service.GetAsync<Item>("/api/items/2");
+            var result = await new Service().GetAsync<IAsyncEnumerable<Item>>(path);
 
             //Assert
-            Assert.Equal("2", result.Id.ToString());
+            Assert.Equal(body, result);
 
             _mockProviderService.VerifyInteractions(); //NOTE: Verifies that interactions registered on the mock provider are called at least once
         }

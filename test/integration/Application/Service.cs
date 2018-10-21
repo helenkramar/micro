@@ -20,6 +20,8 @@ namespace integration
         {
             _testServer = FireupTestServer();
             Client = _testServer.CreateClient();
+
+            Client.Timeout = TimeSpan.FromMinutes(5);
         }
 
         private TestServer FireupTestServer()

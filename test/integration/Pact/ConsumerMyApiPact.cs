@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using integration.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PactNet;
+using PactNet.Infrastructure.Outputters;
 using PactNet.Mocks.MockHttpService;
+using Xunit.Abstractions;
 
 namespace integration.Pact
 {
@@ -15,11 +18,19 @@ namespace integration.Pact
         public IMockProviderService MockProviderService { get; private set; }
 
         public int MockServerPort { get; } = ProviderService.ProviderMock.MockPort;
-        public string MockProviderServiceBaseUri { get; } = ProviderService.ProviderMock.Uri.ToString();
+        public Uri MockProviderServiceBaseUri { get; } = ProviderService.ProviderMock.Uri;
 
         public ConsumerMyApiPact()
         {
-            PactBuilder = new PactBuilder(new PactConfig { PactDir = @"..\pacts", LogDir = @"..\pact_logs" }); //Configures the PactDir and/or LogDir.
+            //PactBuilder = new PactBuilder(new PactConfig { PactDir = @"..\pacts", LogDir = @"..\pact_logs" }); //Configures the PactDir and/or LogDir.
+
+            PactBuilder = new PactBuilder(new PactConfig
+            {
+                PactDir = @".\pacts",
+                LogDir = $@".\pact_logs",
+                SpecificationVersion = "2.0.0"
+            });
+
 
             PactBuilder
               .ServiceConsumer("Consumer")
