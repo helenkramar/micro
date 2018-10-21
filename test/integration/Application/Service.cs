@@ -15,14 +15,11 @@ namespace integration
         private readonly TestServer _testServer;
 
         public HttpClient Client { get; }
+
         public Service()
         {
             _testServer = FireupTestServer();
             Client = _testServer.CreateClient();
-
-            Client.Timeout = TimeSpan.FromMinutes(5);
-
-            var services = _testServer.Host.Services;
         }
 
         private TestServer FireupTestServer()
