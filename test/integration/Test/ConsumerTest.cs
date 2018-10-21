@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using consumer;
+﻿using System.Collections.Generic;
 using integration.Models;
 using integration.Pact;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
 using Xunit;
@@ -15,18 +10,14 @@ namespace integration.Test
     public class SomethingApiConsumerTests : IClassFixture<ConsumerMyApiPact>
     {
         private IMockProviderService _mockProviderService;
-        private string _mockProviderServiceBaseUri;
+        //private string _mockProviderServiceBaseUri;
 
         public SomethingApiConsumerTests(ConsumerMyApiPact data)
         {
             _mockProviderService = data.MockProviderService;
             _mockProviderService.ClearInteractions(); //NOTE: Clears any previously registered interactions before the test is run
-            _mockProviderServiceBaseUri = data.MockProviderServiceBaseUri;
+            //_mockProviderServiceBaseUri = data.MockProviderServiceBaseUri;
         }
-
-        //static IWebHostBuilder CreateWebHostBuilder() =>
-        //    WebHost.CreateDefaultBuilder()
-        //        .UseStartup<Startup>();
 
         [Fact]
         public void GetSomething_WhenTheTesterSomethingExists_ReturnsTheSomething()
@@ -41,7 +32,8 @@ namespace integration.Test
                     Path = "/api/items/2",
                     Headers = new Dictionary<string, object>
                     {
-                        { "Accept", "application/json" }
+                        { "Accept", "application/json" },
+                        { "Content-Type", "application/json; charset=utf-8" }
                     }
                 })
                 .WillRespondWith(new ProviderServiceResponse
@@ -57,8 +49,6 @@ namespace integration.Test
                         name = "Book"
                     }
                 }); //NOTE: WillRespondWith call must come last as it will register the interaction
-
-            //var consumer = CreateWebHostBuilder().Build();//.Run(); //new Service(_mockProviderServiceBaseUri); 
 
             //Act
             var service = new Service();

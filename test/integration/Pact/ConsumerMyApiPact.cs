@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
+using integration.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PactNet;
 using PactNet.Mocks.MockHttpService;
-using PactNet.Models;
 
 namespace integration.Pact
 {
@@ -12,9 +14,8 @@ namespace integration.Pact
 
         public IMockProviderService MockProviderService { get; private set; }
 
-        public int MockServerPort { get; } = 9222;
-
-        public string MockProviderServiceBaseUri { get { return $"http://localhost:{MockServerPort}"; } }
+        public int MockServerPort { get; } = ProviderService.ProviderMock.MockPort;
+        public string MockProviderServiceBaseUri { get; } = ProviderService.ProviderMock.Uri.ToString();
 
         public ConsumerMyApiPact()
         {
@@ -30,6 +31,19 @@ namespace integration.Pact
         public void Dispose()
         {
             PactBuilder.Build(); //NOTE: Will save the pact file once finished
+        }
+    }
+
+    public class ProviderService
+    {
+        public static ProviderMock ProviderMock { get; } = GetProvider("provider");
+
+        private const string AppSettings = "appsettings.json";
+
+        private static ProviderMock GetProvider(string value)
+        {
+            var envFile = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AppSettings));
+            return JsonConvert.DeserializeObject<JObject>(envFile).GetValue(value).ToObject<ProviderMock>();
         }
     }
 }

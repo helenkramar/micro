@@ -34,7 +34,7 @@ namespace integration.Test
             //        .HonoursPactWith("Consumer")
             //        .PactUri("..\\..\\..\\Consumer.Tests\\pacts\\consumer-something_api.json")
             //        //or
-            //        .PactUri("http://pact-broker/pacts/provider/Something%20Api/consumer/Consumer/latest") //You can specify a http or https uri
+            //        .PactUri("http://pact-broker/pacts/provider/Something%20Api/consumer/Consumer/latest") //You can specify a http or https Uri
             //        //or
             //        .PactUri("http://pact-broker/pacts/provider/Something%20Api/consumer/Consumer/latest", new PactUriOptions("someuser", "somepassword")) //You can also specify http/https basic auth details
             //        .Verify();
