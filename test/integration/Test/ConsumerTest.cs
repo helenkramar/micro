@@ -24,20 +24,21 @@ namespace integration.Test
         public async void GetSomething_WhenTheTesterSomethingExists_ReturnsTheSomething()
         {
             //Arrange
-            string path = "api/items";
+            string path = "/api/items";
             dynamic body = new[] { new Item { Id = 4, Name = "candy" }, new Item { Id = 5, Name = "cookie" } };
 
             _mockProviderService
-                .Given("There is a items with id 'test'")
+                .Given("There is a items with id 'teste'")
                 .UponReceiving("A GET request to retrieve the items")
                 .With(new ProviderServiceRequest
                 {
                     Method = HttpVerb.Get,
-                    Path = $"/{path}",
+                    //Path = $"/{path}",
+                    Path = path,
                     Headers = new Dictionary<string, object>
                     {
-                        //{ "Accept", "application/json" },
-                        //{ "Content-Type", "application/json; charset=utf-8" }
+                        { "Accept", "application/json" },
+                        { "Content-Type", "application/json; charset=utf-8" }
                     }
                 })
                 .WillRespondWith(new ProviderServiceResponse
@@ -49,10 +50,10 @@ namespace integration.Test
                     },
                     Body = body
                 }); //NOTE: WillRespondWith call must come last as it will register the interaction
-            path = $@"{_mockProviderServiceBaseUri}{path}";
-
+            //path = @"/api/v1/it";
+            var service = new Service();
             //Act
-            var result = await new Service().GetAsync<IAsyncEnumerable<Item>>(path);
+            var result = await service.GetAsync<List<Item>>("/api/v1/it");
 
             //Assert
             Assert.Equal(body, result);

@@ -27,7 +27,7 @@ namespace integration.Pact
             PactBuilder = new PactBuilder(new PactConfig
             {
                 PactDir = @".\pacts",
-                LogDir = $@".\pact_logs",
+                LogDir = @".\pact_logs",
                 SpecificationVersion = "2.0.0"
             });
 
