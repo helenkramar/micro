@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http;
 using integration.Models;
 using integration.Pact;
 using PactNet.Mocks.MockHttpService;
