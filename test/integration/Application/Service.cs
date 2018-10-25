@@ -20,6 +20,8 @@ namespace integration
         {
             _testServer = FireupTestServer();
             Client = _testServer.CreateClient();
+
+            Client.Timeout = TimeSpan.FromMinutes(5);
         }
 
         private TestServer FireupTestServer()
@@ -27,7 +29,7 @@ namespace integration
             var builder = new WebHostBuilder()
                 .UseConfiguration(new ConfigurationBuilder()
                         .SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                        .AddJsonFile("appsettings.json")
                         .AddEnvironmentVariables()
                         .Build())
                 .CaptureStartupErrors(true)
@@ -64,6 +66,8 @@ namespace integration
         {
             using (var request = new HttpRequestMessage(method, requestUri))
             {
+                request.Headers.Add("Accept", "application/json");
+                //request.Headers.Add("Content-Type", "application/json; charset=utf-8");
                 request.Content = requestContent;
                 return await Client.SendAsync(request);
             }

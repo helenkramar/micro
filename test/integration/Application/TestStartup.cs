@@ -1,4 +1,5 @@
 ﻿using consumer;
+
 using Microsoft.Extensions.Configuration;
 
 namespace integration.Application
