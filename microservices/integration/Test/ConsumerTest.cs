@@ -24,7 +24,7 @@ namespace integration.Test
         {
             //Arrange
             string path = "/api/items";
-            dynamic body = new[] { new Item { Id = 4, Name = "candy" }, new Item { Id = 5, Name = "cookie" } };
+            var body = new List<Item> { new Item { Id = 4, Name = "candy" }, new Item { Id = 5, Name = "cookie" } };
 
             _mockProviderService
                 .Given("There are some items.")
@@ -33,11 +33,6 @@ namespace integration.Test
                 {
                     Method = HttpVerb.Get,
                     Path = path,
-                    Headers = new Dictionary<string, object>
-                    {
-                        { "Accept", "application/json" },
-                        { "Content-Type", "application/json; charset=utf-8" }
-                    }
                 })
                 .WillRespondWith(new ProviderServiceResponse
                 {
@@ -48,13 +43,13 @@ namespace integration.Test
                     },
                     Body = body
                 }); //NOTE: WillRespondWith call must come last as it will register the interaction
-            //path = @"/api/v1/it";
+
             var service = new Service();
             //Act
-            var result = await service.GetAsync<List<Item>>("api/v1/it");
+            var result = await service.GetAsync<IEnumerable<Item>>("/api/v1/it");
 
             //Assert
-            Assert.Equal(body, result);
+            Assert.Equal(body, result, new ItemsSame());
 
             _mockProviderService.VerifyInteractions(); //NOTE: Verifies that interactions registered on the mock provider are called at least once
         }

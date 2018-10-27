@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using provider.Model;
+using System.Collections.Generic;
 
 namespace provider.Controllers
 {
@@ -8,7 +9,7 @@ namespace provider.Controllers
     [ApiController]
     public class ItemsController : ControllerBase
     {
-        Item[] items = {new Item{Id = 1, Name = "Toy"}, new Item { Id = 2, Name = "Book" } };
+        IEnumerable<Item> items = new[] { new Item { Id = 1, Name = "Toy" }, new Item { Id = 2, Name = "Book" } };
 
         // GET api/values
         [HttpGet]
@@ -16,10 +17,10 @@ namespace provider.Controllers
         {
             return Ok(items);
         }
-        
+
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Item> Get(int id)
         {
             return Ok(items.First(item => item.Id == id));
         }

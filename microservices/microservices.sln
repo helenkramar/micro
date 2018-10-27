@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "provider", "provider\provid
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "consumer", "consumer\consumer.csproj", "{C34FD586-C451-4473-9927-98644EC47DA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "integration", "integration\integration.csproj", "{39D178C2-7D3E-486E-8BCA-217CF78282A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "integration", "integration\integration.csproj", "{69B64ECC-CB71-482F-A12B-F2C6C157C7BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{C34FD586-C451-4473-9927-98644EC47DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C34FD586-C451-4473-9927-98644EC47DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C34FD586-C451-4473-9927-98644EC47DA7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39D178C2-7D3E-486E-8BCA-217CF78282A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39D178C2-7D3E-486E-8BCA-217CF78282A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39D178C2-7D3E-486E-8BCA-217CF78282A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39D178C2-7D3E-486E-8BCA-217CF78282A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69B64ECC-CB71-482F-A12B-F2C6C157C7BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69B64ECC-CB71-482F-A12B-F2C6C157C7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69B64ECC-CB71-482F-A12B-F2C6C157C7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69B64ECC-CB71-482F-A12B-F2C6C157C7BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

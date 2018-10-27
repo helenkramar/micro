@@ -24,21 +24,21 @@ namespace integration.Test
                 Verbose = true //Output verbose verification logs to the test output
             };
 
-            //using (WebApp.Start<TestStartup>(serviceUri))
-            //{
-            //    //Act / Assert
-            //    IPactVerifier pactVerifier = new PactVerifier(config);
-            //    pactVerifier
-            //        .ProviderState($"{serviceUri}/provider-states")
-            //        .ServiceProvider("Something API", serviceUri)
-            //        .HonoursPactWith("Consumer")
-            //        .PactUri("..\\..\\..\\Consumer.Tests\\pacts\\consumer-something_api.json")
-            //        //or
-            //        .PactUri("http://pact-broker/pacts/provider/Something%20Api/consumer/Consumer/latest") //You can specify a http or https Uri
-            //        //or
-            //        .PactUri("http://pact-broker/pacts/provider/Something%20Api/consumer/Consumer/latest", new PactUriOptions("someuser", "somepassword")) //You can also specify http/https basic auth details
-            //        .Verify();
-            //}
+            using (WebApp.Start<TestStartup>(serviceUri))
+            {
+                //Act / Assert
+                IPactVerifier pactVerifier = new PactVerifier(config);
+                pactVerifier
+                    .ProviderState($"{serviceUri}/provider-states")
+                    .ServiceProvider("Something API", serviceUri)
+                    .HonoursPactWith("Consumer")
+                    .PactUri("..\\..\\..\\Consumer.Tests\\pacts\\consumer-something_api.json")
+                    //or
+                    .PactUri("http://pact-broker/pacts/provider/Something%20Api/consumer/Consumer/latest") //You can specify a http or https Uri
+                                                                                                           //or
+                    .PactUri("http://pact-broker/pacts/provider/Something%20Api/consumer/Consumer/latest", new PactUriOptions("someuser", "somepassword")) //You can also specify http/https basic auth details
+                    .Verify();
+            }
         }
     }
 }
