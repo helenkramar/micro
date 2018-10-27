@@ -26,9 +26,19 @@ namespace consumer
             services.AddHttpClient("items", c => { c.BaseAddress = provider.Uri; })
                 .AddTypedClient(c => Refit.RestService.For<IItemsClient>(c));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .AddApplicationPart(typeof(Controllers.ValuesController).Assembly);
+            //.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddCors();
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(
+            //        "AllowAnyOrigin",
+            //        builder => builder
+            //            .AllowAnyOrigin()
+            //            .AllowAnyMethod()
+            //            .AllowAnyHeader());
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +51,7 @@ namespace consumer
 
             app.UseMvc();
 
-            app.UseCors();
+            //app.UseCors("AllowAnyOrigin");
         }
     }
 }

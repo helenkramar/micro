@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Refit;
 
 using consumer.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace consumer.Client
 {
