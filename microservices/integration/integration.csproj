@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\consumer\consumer.csproj" />
+    <ProjectReference Include="..\provider\provider.csproj" />
   </ItemGroup>
 
   <ItemGroup>

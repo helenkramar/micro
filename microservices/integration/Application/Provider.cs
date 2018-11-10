@@ -8,7 +8,7 @@ namespace integration.Application
     {
         private readonly IWebHost _host;
 
-        public Provider()
+        public Provider(string url)
         {
             _host = new WebHostBuilder()
                 .UseKestrel()
@@ -16,7 +16,7 @@ namespace integration.Application
                 .CaptureStartupErrors(true)
                 .UseStartup<TestStartup>()
                 .UseSetting("detailedErrors", "true")
-                .UseUrls()
+                .UseUrls(url)
                 .Build();
 
             _host.Start();

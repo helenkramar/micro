@@ -20,11 +20,12 @@ namespace integration.Test
                 {
                     new XUnitOutput(new TestOutputHelper())
                 },
-                CustomHeader = new KeyValuePair<string, string>("Authorization", "Basic VGVzdA=="), //This allows the user to set a request header that will be sent with every request the verifier sends to the provider
+                //CustomHeader = new KeyValuePair<string, string>("Authorization", "Basic VGVzdA=="), //This allows the user to set a request header that will be sent with every request the verifier sends to the provider
                 Verbose = true //Output verbose verification logs to the test output
             };
 
-            using (WebApp.Start<TestStartup>(serviceUri))
+            //using (WebApp.Start<TestStartup>(serviceUri))
+            using (new Provider(serviceUri))
             {
                 //Act / Assert
                 IPactVerifier pactVerifier = new PactVerifier(config);
@@ -34,9 +35,9 @@ namespace integration.Test
                     .HonoursPactWith("Consumer")
                     .PactUri("..\\..\\..\\Consumer.Tests\\pacts\\consumer-something_api.json")
                     //or
-                    .PactUri("http://pact-broker/pacts/provider/Something%20Api/consumer/Consumer/latest") //You can specify a http or https Uri
+                    //.PactUri("http://pact-broker/pacts/provider/Something%20Api/consumer/Consumer/latest") //You can specify a http or https Uri
                                                                                                            //or
-                    .PactUri("http://pact-broker/pacts/provider/Something%20Api/consumer/Consumer/latest", new PactUriOptions("someuser", "somepassword")) //You can also specify http/https basic auth details
+                    //.PactUri("http://pact-broker/pacts/provider/Something%20Api/consumer/Consumer/latest", new PactUriOptions("someuser", "somepassword")) //You can also specify http/https basic auth details
                     .Verify();
             }
         }
