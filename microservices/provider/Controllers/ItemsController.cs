@@ -23,7 +23,7 @@ namespace provider.Controllers
 
         public ItemsController()
         {
-            Items = DbService.GetItems().ToList();
+            Items = DbService.ReadItems().ToList();
         }
 
         [HttpGet]
@@ -117,7 +117,7 @@ namespace provider.Controllers
 
         private void SaveChanges()
         {
-            DbService.PutItems(Items.OrderBy(i => i.Id));
+            DbService.WriteItems(Items.OrderBy(i => i.Id));
         }
     }
 }
