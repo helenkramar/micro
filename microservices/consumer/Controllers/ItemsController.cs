@@ -1,4 +1,6 @@
-﻿using consumer.Client;
+﻿using System.Net;
+
+using consumer.Client;
 using consumer.Models;
 
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +31,12 @@ namespace consumer.Controllers
         {
             var response = _client.Get(id).Result;
             if (!response.IsSuccessStatusCode)
-                return Ok(JObject.Parse(response.Error.Content));
+                return Ok(new Message
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Text = "There was an external error.",
+                    ExternalError = JObject.Parse(response.Error.Content)
+                });
 
             return Ok(response.Content);
         }
@@ -39,7 +46,12 @@ namespace consumer.Controllers
         {
             var response = _client.Post(value).Result;
             if (!response.IsSuccessStatusCode)
-                return Ok(JObject.Parse(response.Error.Content));
+                return Ok(new Message
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Text = "There was an external error.",
+                    ExternalError = JObject.Parse(response.Error.Content)
+                });
 
             return Created(response.Headers.Location, response.Content);
         }
@@ -49,7 +61,12 @@ namespace consumer.Controllers
         {
             var response = _client.Put(id, value).Result;
             if (!response.IsSuccessStatusCode)
-                return Ok(JObject.Parse(response.Error.Content));
+                return Ok(new Message
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Text = "There was an external error.",
+                    ExternalError = JObject.Parse(response.Error.Content)
+                });
 
             return Ok(response.Content);
         }
@@ -59,7 +76,12 @@ namespace consumer.Controllers
         {
             var response = _client.Delete(id).Result;
             if (!response.IsSuccessStatusCode)
-                return Ok(JObject.Parse(response.Error.Content));
+                return Ok(new Message
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Text = "There was an external error.",
+                    ExternalError = JObject.Parse(response.Error.Content)
+                });
 
             return Ok(response.Content);
         }
