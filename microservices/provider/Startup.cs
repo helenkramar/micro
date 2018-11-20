@@ -19,10 +19,11 @@ namespace provider
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
-                .AddApplicationPart(typeof(Controllers.ItemsController).Assembly)
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .AddApplicationPart(typeof(Controllers.ItemsController).Assembly);
+            //.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddCors();
+
             //services.AddCors(options =>
             //{
             //    options.AddPolicy(
@@ -43,7 +44,6 @@ namespace provider
             }
 
             app.UseMvc();
-
             app.UseCors();
             //app.UseCors("AllowAnyOrigin");
         }

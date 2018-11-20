@@ -27,10 +27,11 @@ namespace consumer
                 .AddTypedClient(c => Refit.RestService.For<IItemsClient>(c));
 
             services.AddMvc()
-                .AddApplicationPart(typeof(Controllers.ValuesController).Assembly)
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .AddApplicationPart(typeof(Controllers.ItemsController).Assembly);
+            //.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddCors();
+
             //services.AddCors(options =>
             //{
             //    options.AddPolicy(
@@ -51,7 +52,6 @@ namespace consumer
             }
 
             app.UseMvc();
-
             app.UseCors();
             //app.UseCors("AllowAnyOrigin");
         }
