@@ -3,9 +3,9 @@
     using modeling.Builders;
     using modeling.Pact;
 
-    public class ConsumerDecor : BaseMock
+    public class ProviderDecor : BaseMock
     {
-        public ConsumerDecor(Pact pact) : base(pact)
+        public ProviderDecor(Pact pact) : base(pact)
         {
         }
 
