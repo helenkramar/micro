@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using integration.Application;
 using PactNet;
 using PactNet.Infrastructure.Outputters;
 using Xunit;
 using Xunit.Sdk;
 
-namespace integration.Test
+namespace integration.Test.Provider
 {
     public class SomethingApiTests
     {
@@ -25,8 +24,10 @@ namespace integration.Test
             };
 
             //using (WebApp.Start<TestStartup>(serviceUri))
-            using (new Provider(serviceUri))
+            using (var service = new Application.Provider(serviceUri))
             {
+                
+
                 //Act / Assert
                 IPactVerifier pactVerifier = new PactVerifier(config);
                 pactVerifier

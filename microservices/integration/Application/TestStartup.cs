@@ -1,4 +1,4 @@
-﻿using provider;
+﻿using consumer; //change here to provider
 
 using Microsoft.Extensions.Configuration;
 
