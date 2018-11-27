@@ -24,7 +24,7 @@ namespace integration.Test.Provider
             };
 
             //using (WebApp.Start<TestStartup>(serviceUri))
-            using (var service = new Application.Provider(serviceUri))
+            using (var service = new integration.Infrastructure.Provider.Provider(serviceUri))
             {
                 
 

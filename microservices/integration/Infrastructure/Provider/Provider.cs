@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using integration.Infrastructure.Consumer;
 
-namespace integration.Application
+namespace integration.Infrastructure.Provider
 {
     public class Provider : IDisposable
     {
@@ -14,7 +15,7 @@ namespace integration.Application
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .CaptureStartupErrors(true)
-                .UseStartup<TestStartup>()
+                .UseStartup<ProviderTestStartup>()
                 .UseSetting("detailedErrors", "true")
                 .UseUrls(url)
                 .Build();

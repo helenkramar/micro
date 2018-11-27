@@ -2,21 +2,22 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using integration.Application;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
+
 using Newtonsoft.Json;
 
-namespace integration
+namespace integration.Infrastructure.Consumer
 {
-    public class Service : IDisposable
+    public class Consumer : IDisposable
     {
         private readonly TestServer _testServer;
 
         public HttpClient Client { get; }
 
-        public Service()
+        public Consumer()
         {
             _testServer = FireupTestServer();
             Client = _testServer.CreateClient();
@@ -26,13 +27,13 @@ namespace integration
         {
             var builder = new WebHostBuilder()
                 .UseConfiguration(new ConfigurationBuilder()
-                        .SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile("appsettings.json")
-                        .AddEnvironmentVariables()
-                        .Build())
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .AddEnvironmentVariables()
+                    .Build())
                 .CaptureStartupErrors(true)
                 .UseSetting("detailedErrors", "true")
-                .UseStartup<TestStartup>();
+                .UseStartup<ConsumerTestStartup>();
 
             var server = new TestServer(builder);
             return server;

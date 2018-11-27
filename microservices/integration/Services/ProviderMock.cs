@@ -2,10 +2,11 @@
 {
     using modeling.Builders;
     using modeling.Pact;
+    using Pact;
 
-    public class ProviderDecor : BaseMock
+    public class ProviderMock : BaseMock
     {
-        public ProviderDecor(Pact pact) : base(pact)
+        public ProviderMock(ConsumerPact pact) : base((Pact)pact)
         {
         }
 

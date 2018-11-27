@@ -12,17 +12,17 @@
 
         public int MockServerPort { get; protected set; }
 
-        public Uri MockProviderServiceBaseUri { get; protected set; }
+        //public Uri MockProviderServiceBaseUri { get; protected set; }
 
         protected Pact() { }
 
-        public Pact(Uri uri, int mockPort)
+        public Pact(int mockPort)
         {
-            MockProviderServiceBaseUri = uri;
+            //MockProviderServiceBaseUri = uri;
             MockServerPort = mockPort;
 
-            MockProviderService = PactBuilder.MockService(MockServerPort);
-            MockProviderService.ClearInteractions(); //NOTE: Clears any previously registered interactions before the test is run
+            //MockProviderService = PactBuilder.MockService(MockServerPort);
+            //MockProviderService.ClearInteractions(); //NOTE: Clears any previously registered interactions before the test is run
         }
 
         public string Consumer { get; protected set; }

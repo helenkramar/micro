@@ -54,6 +54,7 @@
     <Compile Include="Builders\ResponseBuilder.cs" />
     <Compile Include="Pact\MockExtension.cs" />
     <Compile Include="Pact\Pact.cs" />
+    <Compile Include="Pact\PactGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\BaseConsumerTest.cs" />
     <Compile Include="Utils\ContentType.cs" />

@@ -17,8 +17,7 @@ namespace integration.Pact
     {
         public ConsumerPact()
         {
-            this.MockServerPort = ProviderService.ProviderMock.MockPort;
-            this.MockProviderServiceBaseUri = ProviderService.ProviderMock.Uri;
+            this.MockServerPort = ProviderService.ProviderMockEntity.MockPort;
             //PactBuilder = new PactBuilder(new PactConfig { PactDir = @"..\pacts", LogDir = @"..\pact_logs" }); //Configures the PactDir and/or LogDir.
 
             PactBuilder = new PactBuilder(new PactConfig
@@ -33,30 +32,40 @@ namespace integration.Pact
               .ServiceConsumer("Consumer")
               .HasPactWith("Something API");
 
-            MockProviderService = PactBuilder.MockService(MockServerPort); //Configure the http mock server
+            //MockProviderService = PactBuilder.MockService(MockServerPort); //Configure the http mock server
         }
 
-        public ConsumerPact(string consumer, string provider, int mockServerPort, ITestOutputHelper output)
+        public ConsumerPact(string consumer, string provider, int mockServerPort) : base(mockServerPort)
         {
             Consumer = consumer;
             Provider = provider;
 
+            PactBuilder = new PactBuilder(new PactConfig
+            {
+                PactDir = @".\pacts",
+                LogDir = @".\pact_logs",
+                SpecificationVersion = "2.0.0"
+            });
+
             PactBuilder
                 .ServiceConsumer(Consumer)
                 .HasPactWith(Provider);
+
+            MockProviderService = PactBuilder.MockService(MockServerPort);
+            MockProviderService.ClearInteractions(); //NOTE: Clears any previously registered interactions before the test is run
         }
     }
 
     public class ProviderService
     {
-        public static ProviderMock ProviderMock { get; } = GetProvider("provider");
+        public static ProviderMockEntity ProviderMockEntity { get; } = GetProvider("provider");
 
         private const string AppSettings = "appsettings.json";
 
-        private static ProviderMock GetProvider(string value)
+        private static ProviderMockEntity GetProvider(string value)
         {
             var envFile = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AppSettings));
-            return JsonConvert.DeserializeObject<JObject>(envFile).GetValue(value).ToObject<ProviderMock>();
+            return JsonConvert.DeserializeObject<JObject>(envFile).GetValue(value).ToObject<ProviderMockEntity>();
         }
     }
 }

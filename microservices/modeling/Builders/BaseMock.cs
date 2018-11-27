@@ -10,7 +10,7 @@
     {
         public Pact Pact { get; }
 
-        protected IMockProviderService MockService { get; }
+        public IMockProviderService MockService { get; }
 
         protected BaseMock(Pact pact)
         {

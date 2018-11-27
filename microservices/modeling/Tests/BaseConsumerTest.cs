@@ -1,14 +1,16 @@
-﻿namespace modeling.Tests
-{
-    using PactNet.Mocks.MockHttpService;
+﻿//using integration.Services;
 
-    public abstract class BaseConsumerTest
-    {
-         
-        protected ProviderDec 
+//namespace integration.Test
+//{
+//    using PactNet.Mocks.MockHttpService;
 
-        protected IMockProviderService _mockProviderService { get; set; }
+//    public abstract class BaseConsumerTest
+//    {
 
-        protected dynamic _mockProviderServiceBaseUri { get; set; }
-    }
-}
+//        protected ProviderDecor RoviderMock { get; set; }
+
+//        protected IMockProviderService _mockProviderService { get; set; }
+
+//        protected dynamic _mockProviderServiceBaseUri { get; set; }
+//    }
+//}
