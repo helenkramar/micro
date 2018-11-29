@@ -5,22 +5,26 @@ using integration.Infrastructure.Consumer;
 
 namespace integration.Infrastructure.Provider
 {
+    using System.Net.Http;
+    using Microsoft.AspNetCore.TestHost;
+
     public class Provider : IDisposable
     {
-        private readonly IWebHost _host;
+        private IWebHost _host { get; set; }
+
+        public HttpClient Client { get; set; }
 
         public Provider(string url)
         {
-            _host = new WebHostBuilder()
+            new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .CaptureStartupErrors(true)
                 .UseStartup<ProviderTestStartup>()
-                .UseSetting("detailedErrors", "true")
+                //.UseSetting("detailedErrors", "true")
                 .UseUrls(url)
-                .Build();
-
-            _host.Start();
+                .Build()
+                .Start();
         }
 
         public void Dispose()

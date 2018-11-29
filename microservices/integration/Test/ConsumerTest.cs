@@ -12,13 +12,13 @@ using modeling.Utils;
 
 namespace integration.Test.Consumer
 {
-    public class SomethingApiConsumerTests : BaseConsumerTest//, IClassFixture<PactGenerator>
+    public class ProviderConsumerTests : BaseConsumerTest
     {
-        public SomethingApiConsumerTests()
+        public ProviderConsumerTests()
         {
             Consumer = new Infrastructure.Consumer.Consumer();
             //_mockProviderService = data.MockProviderService;
-            //_mockProviderServiceBaseUri = data.MockProviderServiceBaseUri;
+            //_mockProviderService.ClearInteractions(); //NOTE: Clears any previously registered interactions before the test is run
         }
 
         //public SomethingApiConsumerTests(PactGenerator data)
