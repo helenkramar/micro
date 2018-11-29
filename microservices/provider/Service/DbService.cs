@@ -14,13 +14,13 @@ namespace provider.Service
         private const string db = @"db\items.json";
         static string path = $@"{Environment.CurrentDirectory}\{db}";
 
-        public static IEnumerable<Item> ReadItems()
+        public static IEnumerable<ItemDTO> ReadItems()
         {
             var envFile = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<JArray>(envFile).ToObject<IEnumerable<Item>>();
+            return JsonConvert.DeserializeObject<JArray>(envFile).ToObject<IEnumerable<ItemDTO>>();
         }
 
-        public static void WriteItems(IEnumerable<Item> items)
+        public static void WriteItems(IEnumerable<ItemDTO> items)
         {
             string content = JsonConvert.SerializeObject(items);
             File.WriteAllText(path, content);

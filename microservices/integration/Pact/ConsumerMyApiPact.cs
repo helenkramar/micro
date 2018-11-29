@@ -33,7 +33,7 @@ namespace integration.Pact
 
             PactBuilder
               .ServiceConsumer("Consumer")
-              .HasPactWith("Something API");
+              .HasPactWith("Provider");
 
             MockProviderService = PactBuilder.MockService(MockServerPort); //Configure the http mock server
         }

@@ -7,11 +7,11 @@ using Xunit;
 
 namespace integration.Test
 {
-    public class SomethingApiConsumerTests : IClassFixture<ConsumerMyApiPact>
+    public class ProviderConsumerTests : IClassFixture<ConsumerMyApiPact>
     {
         IMockProviderService _mockProviderService { get; set; }
 
-        public SomethingApiConsumerTests(ConsumerMyApiPact data)
+        public ProviderConsumerTests(ConsumerMyApiPact data)
         {
             _mockProviderService = data.MockProviderService;
             _mockProviderService.ClearInteractions(); //NOTE: Clears any previously registered interactions before the test is run

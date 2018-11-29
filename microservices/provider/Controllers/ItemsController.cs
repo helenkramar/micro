@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
+using provider.API;
 using provider.Models;
 using provider.Service;
+using provider.Extensions;
 
 namespace provider.Controllers
 {
@@ -19,7 +21,7 @@ namespace provider.Controllers
             .Single(a => a.AttributeType == typeof(RouteAttribute))
             .ConstructorArguments.FirstOrDefault().Value.ToString();
 
-        public List<Item> Items { get; }
+        public List<ItemDTO> Items { get; }
 
         public ItemsController()
         {
@@ -29,7 +31,8 @@ namespace provider.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            return Ok(Items);
+            var items = Items.Select(item => item.AsAPIEntity<ItemAPI>());
+            return Ok(items);
         }
 
         [HttpGet("{id}")]
@@ -50,7 +53,7 @@ namespace provider.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Item> Post([FromBody] Item newItem)
+        public ActionResult<ItemDTO> Post([FromBody] ItemDTO newItem)
         {
             int newId = Items.Last().Id;
             newId++;
@@ -66,7 +69,7 @@ namespace provider.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Item updatedItem)
+        public ActionResult Put(int id, [FromBody] ItemDTO updatedItem)
         {
             try
             {
