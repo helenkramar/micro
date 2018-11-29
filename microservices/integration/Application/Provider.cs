@@ -4,22 +4,31 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace integration.Application
 {
+    using System.Net.Http;
+    using Microsoft.AspNetCore.TestHost;
+
     public class Provider : IDisposable
     {
-        private readonly IWebHost _host;
+        private IWebHost _host { get; set; }
+
+        public HttpClient Client { get; set; }
 
         public Provider(string url)
         {
-            _host = new WebHostBuilder()
+            new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .CaptureStartupErrors(true)
                 .UseStartup<TestStartup>()
-                .UseSetting("detailedErrors", "true")
+                .UseIISIntegration()
+                //.UseSetting("detailedErrors", "true")
                 .UseUrls(url)
-                .Build();
+                .Build()
+                .Start();
 
-            _host.Start();
+            //testServer = StartTestServer();
+            //_host = _builder.Build();
+            //_host.Start();
         }
 
         public void Dispose()

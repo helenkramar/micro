@@ -18,7 +18,6 @@ namespace integration.Pact
         public IMockProviderService MockProviderService { get; private set; }
 
         public int MockServerPort { get; } = ProviderService.ProviderMock.MockPort;
-        public Uri MockProviderServiceBaseUri { get; } = ProviderService.ProviderMock.Uri;
 
         public ConsumerMyApiPact()
         {
