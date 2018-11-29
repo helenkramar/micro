@@ -4,14 +4,14 @@ This package contains the Ruby implementations of the Pact Mock Service, Pact Pr
 
 ## Package contents
 
-This version (1.61.2) of the Pact standalone executables package contains:
+This version (1.54.4) of the Pact standalone executables package contains:
 
-  * pact gem 1.36.2
-  * pact-mock_service gem 2.12.0
-  * pact-support gem 1.8.0
-  * pact-provider-verifier gem 1.20.0
-  * pact_broker-client gem 1.16.2
-  * pact-message gem 0.5.0
+  * pact gem 1.33.0
+  * pact-mock_service gem 2.10.1
+  * pact-support gem 1.7.2
+  * pact-provider-verifier gem 1.15.0
+  * pact_broker-client gem 1.16.1
+  * pact-message gem 0.4.5
 
 
 ## Usage
@@ -76,16 +76,16 @@ Options:
       [--sslkey=SSLKEY]    # Specify the path to the SSL key to use when running the service over HTTPS
 
 Description:
-  Start a stub service with the given pact file(s) or directories. Pact URIs may 
-  be local file or directory paths, or HTTP. Include any basic auth details in 
-  the URL using the format https://USERNAME:PASSWORD@URI. Where multiple 
-  matching interactions are found, the interactions will be sorted by response 
-  status, and the first one will be returned. This may lead to some 
-  non-deterministic behaviour. If you are having problems with this, please 
-  raise it on the pact-dev google group, and we can discuss some potential 
-  enhancements. Note that only versions 1 and 2 of the pact specification are 
-  currently fully supported. Pacts using the v3 format may be used, however, any 
-  matching features added in v3 will currently be ignored.
+  Start a stub service with the given pact file(s). Pact URIs may be local file 
+  paths or HTTP. Include any basic auth details in the URL using the format 
+  https://USERNAME:PASSWORD@URI. Where multiple matching interactions are found, 
+  the interactions will be sorted by response status, and the first one will be 
+  returned. This may lead to some non-deterministic behaviour. If you are having 
+  problems with this, please raise it on the pact-dev google group, and we can 
+  discuss some potential enhancements. Note that only versions 1 and 2 of the 
+  pact specification are currently fully supported. Pacts using the v3 format 
+  may be used, however, any matching features added in v4 will currently be 
+  ignored.
 
 ```
 
@@ -101,15 +101,11 @@ Usage:
 Options:
   -h, --provider-base-url=PROVIDER_BASE_URL                          # Provider host URL
   -c, [--provider-states-setup-url=PROVIDER_STATES_SETUP_URL]        # Base URL to setup the provider states at
-      [--pact-broker-base-url=PACT_BROKER_BASE_URL]                  # Base URL of the Pact Broker from which to retrieve the pacts.
-  -n, [--broker-username=BROKER_USERNAME]                            # Pact Broker basic auth username
-  -p, [--broker-password=BROKER_PASSWORD]                            # Pact Broker basic auth password
-      [--provider=PROVIDER]                                          
-      [--consumer-version-tag=TAG]                                   # Retrieve the latest pacts with this consumer version tag. Used in conjunction with --provider. May be specified multiple times.
   -a, [--provider-app-version=PROVIDER_APP_VERSION]                  # Provider application version, required when publishing verification results
   -r, [--publish-verification-results=PUBLISH_VERIFICATION_RESULTS]  # Publish verification results to the broker
+  -n, [--broker-username=BROKER_USERNAME]                            # Pact Broker basic auth username
+  -p, [--broker-password=BROKER_PASSWORD]                            # Pact Broker basic auth password
       [--custom-provider-header=CUSTOM_PROVIDER_HEADER]              # Header to add to provider state set up and pact verification requests. eg 'Authorization: Basic cGFjdDpwYWN0'. May be specified multiple times.
-      [--custom-middleware=FILE]                                     # Ruby file containing a class implementing Pact::ProviderVerifier::CustomMiddleware. This allows the response to be modified before replaying. Use with caution!
   -v, [--verbose=VERBOSE]                                            # Verbose output
   -f, [--format=FORMATTER]                                           # RSpec formatter. Defaults to custom Pact formatter. Other options are json and RspecJunitFormatter (which outputs xml).
   -o, [--out=FILE]                                                   # Write output to a file instead of $stdout.

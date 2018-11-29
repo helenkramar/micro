@@ -8,8 +8,6 @@ using Xunit.Abstractions;
 
 namespace integration.Test.Provider
 {
-    using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
-
     public class ProviderTests
     {
         private readonly ITestOutputHelper _output;
