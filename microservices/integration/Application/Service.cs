@@ -32,7 +32,7 @@ namespace integration
                         .Build())
                 .CaptureStartupErrors(true)
                 .UseSetting("detailedErrors", "true")
-                .UseStartup<TestStartup>();
+                .UseStartup<ServiceTestStartup>();
 
             var server = new TestServer(builder);
             return server;

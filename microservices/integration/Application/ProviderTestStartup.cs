@@ -6,9 +6,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace integration.Application
 {
-    public class TestStartup : Startup
+    public class ProviderTestStartup : Startup
     {
-        public TestStartup(IConfiguration configuration) : base(configuration)
+        public ProviderTestStartup(IConfiguration configuration) : base(configuration)
         {
         }
 

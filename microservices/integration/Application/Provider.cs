@@ -19,7 +19,7 @@ namespace integration.Application
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .CaptureStartupErrors(true)
-                .UseStartup<TestStartup>()
+                .UseStartup<ProviderTestStartup>()
                 .UseIISIntegration()
                 //.UseSetting("detailedErrors", "true")
                 .UseUrls(url)
